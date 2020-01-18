@@ -1,0 +1,45 @@
+﻿@{
+    ViewBag.Title = "МойСклад";
+}
+
+<div class="row">
+    <div id="productsInfo"></div>
+</div>
+
+@section scripts{
+    <script src="~/Scripts/jquery.signalR-2.4.1.min.js"></script>
+    <script src="~/signalr/hubs" type="text/javascript"></script>
+    <script type="text/javascript">
+        var link = '@Url.Action("ProductsInfo", "Home")';
+        let count = 0;
+        let check = true;
+        $(function () {
+            var storehouse = $.connection.storehouseHub;
+            storehouse.client.displayStorehouse = function () {
+                getDataBase();
+            };
+            $.connection.hub.start().done(function () {
+                getDataBase();
+            }).fail(function (e) {
+                alert(e);
+            });
+        });
+        function getDataBase() {
+            check = false;
+            count++;
+            console.log(count);
+            var $info = $('#productsInfo');
+            $.ajax({
+                url: link,
+                type: 'GET',
+                //datatype: 'json',
+                datatype: 'html',
+                success: function (data) {
+                    $info.empty();
+                    $info.append(data);
+                    check = true;
+               }
+            });
+        }
+    </script>
+}

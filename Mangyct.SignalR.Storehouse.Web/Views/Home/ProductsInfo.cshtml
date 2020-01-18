@@ -1,0 +1,31 @@
+﻿@model Mangyct.SignalR.Storehouse.Web.Models.ProductsInfoVM
+
+<h3>ВСЕГО ТОВАРА НА СКЛАДЕ</h3>
+<div class="row">
+    <div class="col">
+        Количество товара: @Model.TotalProducts.Count
+    </div>
+    <div class="col">
+        Общая цена: @Model.TotalProducts.Price
+    </div>
+</div>
+
+<h3>ВНЕСЕНО ЗА ВСЕ ВРЕМЯ</h3>
+<div class="row">
+    <div class="col">
+        Количество товара: @Model.TodayUpProducts.Count
+    </div>
+    <div class="col">
+        Общая цена: @Model.TodayUpProducts.Price
+    </div>
+</div>
+
+<h3>ПРОДАНО ЗА ВСЕ ВРЕМЯ</h3>
+<div class="row">
+    <div class="col">
+        Количество товара: @Model.TodayDownProducts.Count
+    </div>
+    <div class="col">
+        Общая цена: @Model.TodayDownProducts.Price
+    </div>
+</div>

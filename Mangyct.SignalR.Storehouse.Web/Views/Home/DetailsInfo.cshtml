@@ -1,0 +1,78 @@
+﻿@model IEnumerable<Mangyct.SignalR.Storehouse.Web.Models.DetailsInfoVM>
+
+@foreach (var item in Model)
+{
+    int totalCount = 0;
+    decimal totalPrice = 0M;
+    decimal totalTotal = 0M;
+
+    <h3>@item.Name</h3>
+    <div class="row">
+        <div class="">
+            ПРИХОД
+            <table class="table-bordered text-center">
+                <tr class="text-info">
+                    <td>Дата</td>
+                    <td>Кол-во</td>
+                    <td>Цена</td>
+                    <td>Общая стоимость</td>
+                </tr>
+                @foreach (var up in item.DateStoresUp)
+                {
+                    var total = up.Count * up.Price;
+                    totalCount += up.Count;
+                    totalPrice += up.Price;
+                    totalTotal += total;
+                    <tr>
+                        <td>@up.Date</td>
+                        <td>@up.Count</td>
+                        <td>@up.Price</td>
+                        <td>@total</td>
+                    </tr>
+                }
+                <tr class="text-success">
+                    <td></td>
+                    <td>@totalCount</td>
+                    <td>@totalPrice</td>
+                    <td>@totalTotal</td>
+                </tr>
+            </table>
+        </div><p></p>
+        <div class="">
+            ПРОДАЖА
+            <table class="table-bordered text-center">
+                <tr class="text-info">
+                    <td>Дата</td>
+                    <td>Кол-во</td>
+                    <td>Цена</td>
+                    <td>Общая стоимость</td>
+                </tr>
+                @{
+                    totalCount = 0;
+                    totalPrice = 0M;
+                    totalTotal = 0M;
+                 }
+                @foreach (var up in item.DateStoresDown)
+                {
+                    var total = up.Count * up.Price;
+                    totalCount += up.Count;
+                    totalPrice += up.Price;
+                    totalTotal += total;
+                    <tr>
+                        <td>@up.Date</td>
+                        <td>@up.Count</td>
+                        <td>@up.Price</td>
+                        <td>@total</td>
+                    </tr>
+                }
+                <tr class="text-success">
+                    <td></td>
+                    <td>@totalCount</td>
+                    <td>@totalPrice</td>
+                    <td>@totalTotal</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+}
+
